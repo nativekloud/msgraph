@@ -6,6 +6,9 @@
             [slingshot.slingshot :refer [throw+ try+]]))
 
 
+(set! *warn-on-reflection* true)
+
+
 (def settings (atom  {:params     { :client_id    ""
                                    :client_secret ""
                                    :scope         ["https://graph.microsoft.com/.default"]
@@ -36,8 +39,8 @@
 (def version "v1.0")
 
 (defn trunc
-  [s n]
-  (subs s 0 (min (count s) n)))
+    [s n]
+    (subs s 0 (min (count s) n)))
 
 
 (def api-base-url (str  "https://graph.microsoft.com" "/" version))
@@ -191,7 +194,8 @@
         all (concat folders children)]
     all))
 
-
+(defn get-group-conversations [group]
+  (api-get (str "/groups/" (:id group) "/conversations")))
 
 ;; Messages
 
@@ -211,3 +215,9 @@
   (let [users (get-users)
         groups (get-groups)]
     (concat users groups)))
+
+(defn totalItemCount [folders]
+  (reduce (fn [sum folder] (+ (:totalItemCount folder) sum))
+                                   0
+                                   folders))
+
