@@ -14,4 +14,3 @@
 
   (testing "Fetch groups."
     (is (not (empty? (get-groups))))))
-f
