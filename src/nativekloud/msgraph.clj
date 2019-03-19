@@ -6,8 +6,6 @@
             [slingshot.slingshot :refer [throw+ try+]]))
 
 
-(set! *warn-on-reflection* true)
-
 
 (def settings (atom  {:params     { :client_id    ""
                                    :client_secret ""
