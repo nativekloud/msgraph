@@ -164,6 +164,9 @@
 (defn get-groups []
   (api-get "/groups?$top=999"))
 
+(defn get-domains []
+  (api-get "/domains"))
+
 (defn filter-with-mail [users]
   (filter #(not-empty (:mail %)) users))
 
