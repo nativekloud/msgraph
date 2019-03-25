@@ -203,6 +203,15 @@
 (defn messages [user folder]
   (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages?$top=999")))
 
+(defn messages-since [user folder date]
+  "date format ?$filter=ReceivedDateTime ge 2019-04-01"
+  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages?$filter=ReceivedDateTime ge " date)))
+
+(defn messages-with-state [user folder state]
+  (if (:initial state)
+    (messages user folder)
+    (messages-since user folder (:time-started state))))
+
 (defn messages-callback [user folder fn]
   (when-not (zero? (:totalItemCount folder))
     (log/info "geting messages in folder " (:displayName folder) " totalItemCount:" (:totalItemCount folder) )
