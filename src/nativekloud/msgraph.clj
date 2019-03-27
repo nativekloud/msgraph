@@ -89,7 +89,7 @@
      (throw+)))
   
    :on-error
-   :max-retry :forever
+   :max-retry 5
    :track-as "etl.msgraph.client"
    :log-stacktrace false
    )
