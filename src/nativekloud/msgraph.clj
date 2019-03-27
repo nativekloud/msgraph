@@ -124,13 +124,13 @@
 (defn get-users
   "Lists users in the organization."
   [token]
-  (api-get "/users?$top=999") token)
+  (api-get "/users?$top=999" token))
 
 (defn get-groups [token]
-  (api-get "/groups?$top=999") token)
+  (api-get "/groups?$top=999" token))
 
 (defn get-domains [token]
-  (api-get "/domains") token)
+  (api-get "/domains" token))
 
 (defn filter-with-mail [users]
   (filter #(not-empty (:mail %)) users))
@@ -138,10 +138,10 @@
 ;; Folders
 
 (defn mailFolders [user token]
-  (api-get (str "/users/" (:id user) "/mailFolders")) token)
+  (api-get (str "/users/" (:id user) "/mailFolders") token))
 
 (defn childFolders [user folder token]
-  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/childFolders")) token)
+  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/childFolders") token))
 
 
 (defn get-all-childFolders [user folders token]
