@@ -54,7 +54,6 @@
      (log/warn "401: Auth error" url))
    
    (catch Object _
-      (log/error "Error calling " url)
      (throw+)))
   
    :on-error
