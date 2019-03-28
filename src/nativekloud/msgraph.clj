@@ -48,9 +48,9 @@
                   })
                         ;
    (catch [:status 404] {:keys [request-time headers body]}
-     (log/warn "404" request-time headers body))
+     (log/warn "404: Resource not found" url))
    (catch Object _
-      (log/error "unexpected error")
+      (log/error "unexpected error.")
      ;(log/error (:throwable &throw-context) "unexpected error")
      (throw+)))
   
