@@ -49,9 +49,12 @@
                         ;
    (catch [:status 404] {:keys [request-time headers body]}
      (log/warn "404: Resource not found" url))
+
+   (catch [:status 401] {:keys [request-time headers body]}
+     (log/warn "401: Auth error" url))
+   
    (catch Object _
-      (log/error "unexpected error.")
-     ;(log/error (:throwable &throw-context) "unexpected error")
+      (log/error "Error calling " url)
      (throw+)))
   
    :on-error
@@ -167,7 +170,7 @@
 ;; Messages
 
 (defn messages [user folder token]
-  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages?$top=999") token))
+  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages?$top=500") token))
 
 (defn messages-since [user folder date token]
   "date format ?$filter=ReceivedDateTime ge 2019-04-01"
