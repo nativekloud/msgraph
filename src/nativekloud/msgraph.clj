@@ -169,7 +169,7 @@
 ;; Messages
 
 (defn messages [user folder token]
-  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages?$top=500") token))
+  (api-get (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages") token))
 
 (defn messages-since [user folder date token]
   "date format ?$filter=ReceivedDateTime ge 2019-04-01"
