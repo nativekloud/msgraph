@@ -182,6 +182,20 @@
     (messages user folder token)
     (messages-since user folder (:time-started state) token)))
 
+(defn list-attachments [user folder msg token]
+  "List message attachments  
+    /users/{id | userPrincipalName}/mailFolders/{id}/childFolders/{id}/messages/{id}/attachments"
+  (api-get
+   (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages/" (:id msg) "/attachments")
+   token))
+
+(defn get-attachment [user folder msg attachment token]
+  "Get attachment  
+    /users/{id | userPrincipalName}/mailFolders/{id}/childFolders/{id}/messages/{id}/attachments/{id}"
+  (api-get
+   (str "/users/" (:id user) "/mailFolders/" (:id folder) "/messages/" (:id msg) "/attachments/" (:id attachment) )
+   token))
+
 ;; (defn messages-callback [user folder fn]
 ;;   (when-not (zero? (:totalItemCount folder))
 ;;     (log/info "geting messages in folder " (:displayName folder) " totalItemCount:" (:totalItemCount folder) )
