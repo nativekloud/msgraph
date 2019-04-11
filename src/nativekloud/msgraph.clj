@@ -50,6 +50,9 @@
    (catch [:status 404] {:keys [request-time headers body]}
      (log/warn "404: Resource not found" url))
 
+   (catch [:status 400] {:keys [request-time headers body]}
+     (log/warn "400: Bad request" url))
+
    (catch [:status 401] {:keys [request-time headers body]}
      (log/warn "401: Auth error" url))
    
